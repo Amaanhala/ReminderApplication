@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReminderApplication.View.AddMusicPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Add Music">
+
+    <StackLayout Spacing="10">
+        <Label Text="Upload Music"
+               FontSize="Large"
+               HorizontalOptions="Center"/>
+        <Button Text="Select Music File"
+                Clicked="OnSelectMusicClicked"/>
+        <Label x:Name="SelectedMusicLabel"
+               Text="No music file selected."
+               FontAttributes="Italic"/>
+        <Button Text="Save Music"
+                Clicked="OnSaveButtonClicked"/>
+        <ListView ItemsSource="{Binding AudioFiles}" 
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None"
+                  SelectionMode="None"
+                  Margin="10"
+                  VerticalOptions="FillAndExpand">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0">
+                                <Label Text="{Binding FileName}"
+                                       FontSize="Large"/>
+                            </StackLayout>
+                            <Button Text="Delete"
+                                        Grid.Column="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteMusicCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Red"
+                                        TextColor="White"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

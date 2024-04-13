@@ -1,0 +1,46 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ReminderApplication.Converters;assembly=ReminderApplication"
+             x:Class="ReminderApplication.View.FamilyPhotosPage"
+             x:Name="familyPhotosPage"
+             Title="Family Photos"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <converters:ByteArrayToImageSourceConverter x:Key="BytesToImageConverter" />
+        <Style x:Key="TileStyle" TargetType="Frame">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="BorderColor" Value="Transparent" />
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <CollectionView ItemsSource="{Binding FamilyPhotos}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource TileStyle}">
+                            <StackLayout>
+                                <Image Source="{Binding ImageBytes, Converter={StaticResource BytesToImageConverter}}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="250"
+                                       WidthRequest="250" />
+                                <Label Text="{Binding FamilyMemberName, StringFormat='{0}'}"
+                                       FontSize="15"
+                                       VerticalOptions="Center" HorizontalOptions="Center"
+                                       TextColor="Black" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

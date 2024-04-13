@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReminderApplication.View.LoginPage"
+             xmlns:local="clr-namespace:ReminderApplication.ViewModel"
+             x:DataType="local:LoginViewModel"
+             Title="Login">
+    
+        <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="30">
+            <Label Text="Email" />
+            <Entry Text="{Binding Email}" />
+            <Label Text="Password" />
+            <Entry Text="{Binding Password}" IsPassword="True" />
+        <Button Text="Login" Command="{Binding LoginCommand}" Margin="230,0,0,-43"/>
+        <Button Text="Register" Clicked="OnRegisterButtonClicked"  Margin="0,0,200,0"/>
+        </StackLayout>
+</ContentPage>

@@ -1,0 +1,230 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReminderApplication.View.CaregiverTasksPage"
+             BackgroundColor="{StaticResource PageBackgroundColor}"
+             xmlns:converters="clr-namespace:ReminderApplication.Converters;assembly=ReminderApplication"
+             xmlns:vm="clr-namespace:ReminderApplication.ViewModel">
+
+    
+    <ContentPage.Resources>
+        <converters:ByteArrayToImageSourceConverter x:Key="BytesToImageConverter" />
+        <converters:StringNullOrEmptyToBoolConverter x:Key="StringNullOrEmptyToBoolConverter" />
+    </ContentPage.Resources>
+    
+    <ContentPage.BindingContext>
+        <vm:TaskListViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="AddTaskButton"
+            Text="Add Task"
+            Command="{Binding NavigateToAddTaskCommand}" />
+        <ToolbarItem
+            x:Name="AddImageButton"
+            Text="Add Image"
+            Command="{Binding NavigateToAddImageCommand}" />
+        <ToolbarItem
+            x:Name="AddMusicButton"
+            Text="Add Music"
+            Command="{Binding NavigateToAddMusicCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Caregiver Tasks"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start" FontSize="20"/>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Task Date:" VerticalOptions="End" Margin="10,10,10,10"/>
+                    <DatePicker x:Name="TaskDatePicker"
+                            Format="dd-MM-yyyy"
+                            DateSelected="OnDateSelected" 
+                            Margin="0,10,0,0"/>
+                </StackLayout>
+
+                <BoxView HeightRequest="1" BackgroundColor="Black" Margin="0, 10"/>
+
+                <CollectionView ItemsSource="{Binding Tasks}"
+                            Margin="0" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                     Padding="10"
+                                     Spacing="10">
+
+                                <Label Text="{Binding Breakfast, StringFormat='Breakfast: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Breakfast, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding BreakfastTime, StringFormat='Breakfast Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Breakfast, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding Lunch, StringFormat='Lunch: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Lunch, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding LunchTime, StringFormat='Lunch Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Lunch, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding Dinner, StringFormat='Dinner: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Dinner, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding DinnerTime, StringFormat='Dinner Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Dinner, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding FoodDetails, StringFormat='Other Food: {0}'}" 
+                                       FontSize="Small"
+                                       IsVisible="{Binding FoodDetails, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding FoodTime, StringFormat='Food Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding FoodDetails, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding WalkDetails, StringFormat='Daily Walk: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WalkDetails, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding WalkTime, StringFormat='Walk Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WalkDetails, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+               
+                                <Label Text="{Binding Activity, StringFormat='Daily Activites: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Activity, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding ActivityTime, StringFormat='Daily Activites Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Activity, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding Appointments, StringFormat='Appointment: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Appointments, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding AppointmentsTime, StringFormat='Appointment Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding Appointments, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+
+                                <Label Text="{Binding WaterReminderMorning, StringFormat='Water Reminder Morning: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderMorning, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding WaterReminderMorningTime, StringFormat='Water Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderMorning, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+            
+
+                                <Label Text="{Binding WaterReminderAfternoon, StringFormat='Water Reminder Afternoon: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderAfternoon, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding WaterReminderAfternoonTime, StringFormat='Water Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderAfternoon, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+
+                                <Label Text="{Binding WaterReminderEvening, StringFormat='Water Reminder Evening: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderEvening, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding WaterRemindereEveningTime, StringFormat='Water Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderEvening, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+
+                                <Label Text="{Binding WaterReminderNight, StringFormat='Water Reminder Night: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderNight, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding WaterReminderNightTime, StringFormat='Water Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding WaterReminderNight, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+
+                                
+                                <Label Text="{Binding MorningMedicines, StringFormat='Medicine Reminder Morning: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MorningMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding MorningMedicinesTime, StringFormat='Medicine Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MorningMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding AfternoonMedicines, StringFormat='Medicine Reminder Afternoon: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding AfternoonMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding AfternoonMedicinesTime, StringFormat='Medicine Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding AfternoonMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+
+                                <Label Text="{Binding EveningMedicines, StringFormat='Medicine Reminder Evening: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding EveningMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding EveningMedicinesTime, StringFormat='Medicine Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding EveningMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+
+                                <Label Text="{Binding NightMedicines, StringFormat='Medicine Reminder Night: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding NightMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding NightMedicinesTime, StringFormat='Medicine Reminder Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding NightMedicines, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                
+                                
+                                <Label Text="{Binding MoreTasks1, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks1, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding MoreTasksTime1, StringFormat='More Tasks Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks1, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding MoreTasks2, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks2, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding MoreTasksTime2, StringFormat='More Tasks Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks3, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding MoreTasks3, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks3, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding MoreTasksTime3, StringFormat='More Tasks Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks3, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding MoreTasks4, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks4, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding MoreTasksTime4, StringFormat='More Tasks Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks4, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                <Label Text="{Binding MoreTasks5, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks5, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding MoreTasksTime5, StringFormat='More Tasks Time: {0:t}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding MoreTasks5, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+
+                                
+                                <Image Source="{Binding ImageBytes, Converter={StaticResource BytesToImageConverter}}" />
+                                <Label Text="{Binding PhotoDetails, StringFormat='Photo Details: {0}'}"
+                                       FontSize="Small"
+                                       IsVisible="{Binding PhotoDetails, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" />
+                                <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}"
+                                               FontSize="Small"
+                                               TextColor="Gray" />
+                                <Button Text="Delete"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TaskListViewModel}}, Path=DeleteTaskCommand}"
+                    CommandParameter="{Binding .}"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="White" 
+                    HorizontalOptions="End" 
+                    Margin="-30,-40,30,0" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

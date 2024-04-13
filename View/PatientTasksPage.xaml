@@ -1,0 +1,427 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReminderApplication.View.PatientTasksPage"
+             xmlns:vm="clr-namespace:ReminderApplication.ViewModel"
+             xmlns:converters="clr-namespace:ReminderApplication.Converters;assembly=ReminderApplication"
+             x:Name="patientTasksPage"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <converters:ByteArrayToImageSourceConverter x:Key="BytesToImageConverter" />
+        <converters:FoodDetailsToVisibilityConverter x:Key="FoodDetailsToVisibilityConverter" />
+        <converters:WalkDetailsToVisibilityConverter x:Key="WalkDetailsToVisibilityConverter" />
+        <converters:FamilyMemberNameToVisibilityConverter x:Key="FamilyMemberNameToVisibilityConverter" />
+        <converters:FoodTimeToVisibilityConverter x:Key="FoodTimeToVisibilityConverter" />
+        <converters:WalkTimeToVisibilityConverter x:Key="WalkTimeToVisibilityConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:TaskListViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Family" Command="{Binding NavigateToFamilyCommand}" />
+        <ToolbarItem Text="Play Game" Command="{Binding NavigateToGamesCommand}" />
+        <ToolbarItem Text="Music" Command="{Binding NavigateToMusicCommand}" />
+        <ToolbarItem Text="Patient Music" Command="{Binding NavigateToPatientMusicCommand}" />
+    </ContentPage.ToolbarItems>
+
+
+    
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <CollectionView ItemsSource="{Binding Tasks}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10"
+                                   BackgroundColor="White"
+                                   BorderColor="Black"
+                                   HasShadow="True"
+                                   CornerRadius="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                    <StackLayout Spacing="10">
+                                        <Label Text="{Binding Title}"
+                                                   FontAttributes="Bold"
+                                                   FontSize="22"
+                                                   TextColor="Black">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding Title}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+       
+                                        <Label Text="{Binding DueDate, StringFormat='{0:dd-MM-yyyy}'}"
+                                               FontSize="18"
+                                               TextColor="Gray" />
+
+
+                                        <Label Text="{Binding Breakfast, StringFormat='Breakfast: {0}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding Breakfast, Converter={StaticResource FoodDetailsToVisibilityConverter}}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding Breakfast, StringFormat='Breakfast: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding BreakfastTime, StringFormat='{0:t}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding BreakfastTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                        <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding BreakfastTime, StringFormat='Breakfast time: {0:t}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding Lunch, StringFormat='Lunch: {0}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding Lunch, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding Lunch, StringFormat='Lunch: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding LunchTime, StringFormat='{0:t}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding LunchTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding LunchTime, StringFormat='Lunch Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+                                        <Label Text="{Binding Dinner, StringFormat='Dinner: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding Dinner, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding Dinner, StringFormat='Dinner: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding DinnerTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding DinnerTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding DinnerTime, StringFormat='Dinner Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <Label Text="{Binding FoodDetails, StringFormat='Other Food: {0}'}" 
+                                               FontSize="Medium"
+                                               IsVisible="{Binding FoodDetails, Converter={StaticResource FoodDetailsToVisibilityConverter}}" > 
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding FoodDetails, StringFormat='More Food: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding FoodTime, StringFormat='{0:t}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding FoodTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >   
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding FoodTime, StringFormat='Food Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+                                        <Label Text="{Binding WalkDetails, StringFormat='Daily Walk: {0}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding WalkDetails, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WalkDetails, StringFormat='Walk: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding WalkTime, StringFormat='{0:t}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding WalkTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WalkTime, StringFormat='Walk Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding Activity, StringFormat='Daily Activites: {0}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding Activity, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding Activity, StringFormat='Activity: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding ActivityTime, StringFormat='{0:t}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding ActivityTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding ActivityTime, StringFormat='Activity Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding Appointments, StringFormat='Appointment: {0}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding Appointments, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding Appointments, StringFormat='Appointments: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding AppointmentsTime, StringFormat='{0:t}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding AppointmentsTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding AppointmentsTime, StringFormat='Appointments Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+
+                                        <Label Text="{Binding WaterReminderMorning, StringFormat='Water Reminder Morning: {0}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding WaterReminderMorning, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterReminderMorning, StringFormat='Water Morning: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding WaterReminderMorningTime, StringFormat='{0:t}'}"
+                                               FontSize="Medium"
+                                               IsVisible="{Binding WaterReminderMorningTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                                <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterReminderMorningTime, StringFormat='Water Morning Time: {0}'}" />
+                                                </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding WaterReminderAfternoon, StringFormat='Water Reminder Afternoon: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding WaterReminderAfternoon, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterReminderAfternoon, StringFormat='Water Afternoon: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding WaterReminderAfternoonTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding WaterReminderAfternoonTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterReminderAfternoonTime, StringFormat='Water Afternoon Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding WaterReminderEvening, StringFormat='Water Reminder Evening: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding WaterReminderEvening, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterReminderEvening, StringFormat='Water Evening: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding WaterRemindereEveningTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding WaterRemindereEveningTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterRemindereEveningTime, StringFormat='Water Evening Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding WaterReminderNight, StringFormat='Water Reminder Night: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding WaterReminderNight, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterReminderNight, StringFormat='Water Night: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding WaterReminderNightTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding WaterReminderNightTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding WaterReminderNightTime, StringFormat='Water Night Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+
+                                        <Label Text="{Binding MorningMedicines, StringFormat='Medicine Reminder Morning: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MorningMedicines, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MorningMedicines, StringFormat='Morning Medicines: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding MorningMedicinesTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MorningMedicinesTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MorningMedicinesTime, StringFormat='Morning Medicines Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+                                        <Label Text="{Binding AfternoonMedicines, StringFormat='Medicine Reminder Afternoon: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding AfternoonMedicines, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding AfternoonMedicines, StringFormat='Afternoon Medicines: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding AfternoonMedicinesTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding AfternoonMedicinesTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding AfternoonMedicinesTime, StringFormat='Afternoon Medicines Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding EveningMedicines, StringFormat='Medicine Reminder Evening: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding EveningMedicines, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding EveningMedicines, StringFormat='Evening Medicines: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding EveningMedicinesTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding EveningMedicinesTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding EveningMedicinesTime, StringFormat='Evening Medicines Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding NightMedicines, StringFormat='Medicine Reminder Night: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding NightMedicines, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding NightMedicines, StringFormat='Night Medicines: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding NightMedicinesTime, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding NightMedicinesTime, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding NightMedicinesTime, StringFormat='Night Medicines Time: {0}'}" />
+                                            </Label.GestureRecognizers> 
+                                        </Label>
+
+
+
+                                        <Label Text="{Binding MoreTasks1, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasks1, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasks1, StringFormat='More Tasks : {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding MoreTasksTime1, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasksTime1, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasksTime1, StringFormat='Breakfast: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+                                        <Label Text="{Binding MoreTasks2, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasks2, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasks2, StringFormat='More Tasks: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding MoreTasksTime2, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasksTime2, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasksTime2, StringFormat='More Tasks Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding MoreTasks3, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasks3, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasks3, StringFormat='More Tasks: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding MoreTasksTime3, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasksTime3, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasksTime3, StringFormat='More Tasks Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding MoreTasks4, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasks4, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasks4, StringFormat='More Tasks: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="{Binding MoreTasksTime4, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasksTime4, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasksTime4, StringFormat='More Tasks Time: {0}'}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+
+
+
+                                        <Label Text="{Binding MoreTasks5, StringFormat='More Tasks: {0}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasks5, Converter={StaticResource FoodDetailsToVisibilityConverter}}" >
+                                        <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasks5, StringFormat='More Tasks: {0}'}" />
+                                        </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <Label Text="{Binding MoreTasksTime5, StringFormat='{0:t}'}"
+                                       FontSize="Medium"
+                                       IsVisible="{Binding MoreTasksTime5, Converter={StaticResource FoodTimeToVisibilityConverter}}" >
+                                        <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference patientTasksPage}, Path=BindingContext.SpeakTextCommand}" CommandParameter="{Binding MoreTasksTime5, StringFormat='More Tasks Time: {0}'}" />
+                                        </Label.GestureRecognizers>
+                                        </Label>
+
+
+                                        <Image Source="{Binding ImageBytes, Converter={StaticResource BytesToImageConverter}}" />
+                                        <Label Text="{Binding PhotoDetails, StringFormat='Photo Details: {0}'}"
+                                               FontSize="20"
+                                               TextColor="Black"
+                                               IsVisible="{Binding PhotoDetails, Converter={StaticResource FamilyMemberNameToVisibilityConverter}}" />
+                                        <Label Text="{Binding BatteryStatus}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" TextColor="Red" FontAttributes="Bold" FontSize="Medium"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

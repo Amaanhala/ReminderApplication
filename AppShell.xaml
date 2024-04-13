@@ -1,0 +1,28 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:ReminderApplication.View"
+       xmlns:selector="clr-namespace:ReminderApplication"
+       x:Class="ReminderApplication.AppShell">
+
+    <FlyoutItem Title="Home">
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}" />
+    </FlyoutItem>
+
+    <ShellItem Route="RegisterPage">
+        <ShellContent ContentTemplate="{DataTemplate views:RegisterPage}" />
+    </ShellItem>
+    <ShellItem Route="AdminPage">
+        <ShellContent ContentTemplate="{DataTemplate views:AdminPage}" />
+    </ShellItem>
+    <ShellItem Route="PatientTasksPage">
+        <ShellContent ContentTemplate="{DataTemplate views:PatientTasksPage}" />
+    </ShellItem>
+    <ShellItem Route="CaregiverTasksPage">
+        <ShellContent ContentTemplate="{DataTemplate views:CaregiverTasksPage}" />
+    </ShellItem>
+    <Shell.Resources>
+        <ResourceDictionary>
+            <selector:LoginPageTemplateSelector x:Key="LoginPageTemplate" />
+        </ResourceDictionary>
+    </Shell.Resources>
+</Shell>

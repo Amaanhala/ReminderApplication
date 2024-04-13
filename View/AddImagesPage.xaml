@@ -1,0 +1,62 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ReminderApplication.Converters;assembly=ReminderApplication"
+             x:Class="ReminderApplication.View.AddImagePage"
+             Title="Add Image"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <converters:ByteArrayToImageSourceConverter x:Key="BytesToImageConverter" />
+        <Style x:Key="TileStyle" TargetType="Frame">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="BorderColor" Value="Transparent" />
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Family Member"
+                       FontSize="Medium" Margin="10,10,0,-4"/>
+                <Entry x:Name="FamilyMemberName"
+                       Placeholder="Family Member Name" 
+                       Margin="10,0,10,10"/>
+
+                <Button Text="Upload Image" Clicked="OnPickImageClicked" Margin="10,10,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Image x:Name="SelectedImage" />
+
+                <Button Text="Save" Clicked="OnSaveButtonClicked" Margin="0,-44,10,0" HorizontalOptions="End" VerticalOptions="Center"/>
+
+                <CollectionView ItemsSource="{Binding FamilyPhotos}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Style="{StaticResource TileStyle}">
+                                <StackLayout>
+                                    <Image x:Name="FamilyPhotoPage" Source="{Binding ImageBytes, Converter={StaticResource BytesToImageConverter}}"
+                                            Aspect="AspectFill"
+                                            HeightRequest="250"
+                                            WidthRequest="250">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnImageTapped" NumberOfTapsRequired="1" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Label Text="{Binding FamilyMemberName, StringFormat='{0}'}"
+                                       FontSize="15"
+                                       VerticalOptions="Center" HorizontalOptions="Center"
+                                       TextColor="Black" />
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,55 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ReminderApplication.ViewModel"
+             xmlns:converters="clr-namespace:ReminderApplication.Converters"
+             x:Class="ReminderApplication.View.GamesPage2"
+             BackgroundColor="LightGray">
+
+    <ContentPage.Resources>
+        <converters:BoolToOpacityConverter x:Key="BoolToOpacityConverter" />
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+        <converters:CardImageConverter x:Key="CardImageConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModels:MemoryGameViewModel2 />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout>
+            <FlexLayout Direction="Row"
+                        Wrap="Wrap"
+                        AlignItems="Start"
+                        AlignContent="Start"
+                        JustifyContent="SpaceEvenly">
+                <CollectionView ItemsSource="{Binding MemoryGameCards}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="3" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid WidthRequest="100" HeightRequest="100">
+                                <Image Source="{Binding ImageSource}"
+                                       Aspect="AspectFit"
+                                       IsVisible="{Binding IsFlipped}"
+                                       Opacity="{Binding IsMatched, Converter={StaticResource BoolToOpacityConverter}}" />
+                                <Button Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MemoryGameViewModel}}, Path=CardTappedCommand}"
+                                        CommandParameter="{Binding}"
+                                        BackgroundColor="Black"
+                                        IsVisible="{Binding IsFlipped, Converter={StaticResource InverseBoolConverter}}"
+                                        IsEnabled="{Binding IsMatched, Converter={StaticResource InverseBoolConverter}}" Margin="10" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </FlexLayout>
+
+            <StackLayout IsVisible="{Binding IsGameWon}">
+                <Label Text="Congratulations! You won the game!" />
+                <Button Text="Play again" Command="{Binding ReplayCommand}" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

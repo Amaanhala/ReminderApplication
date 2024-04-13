@@ -1,0 +1,330 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReminderApplication.View.AddTaskPage"
+             Title="Patient Task Form">
+
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Due Date"
+                   FontSize="Medium" />
+            <DatePicker x:Name="DueDatePicker"
+                        Format="dd-MM-yyyy" />
+
+            <Label Text="Breakfast"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="BreakfastEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Breakfast details" />
+                <TimePicker x:Name="BreakfastPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Lunch"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="LunchEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Lunch details" />
+                <TimePicker x:Name="LunchPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Dinner"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="DinnerEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Dinner details" />
+                <TimePicker x:Name="DinnerPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+        
+            <Label Text="Food Details"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="PatientFoodsEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter any other food details" />
+                <TimePicker x:Name="FoodTimePicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Walk Details"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="PatientWalkEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter walk details" />
+                <TimePicker x:Name="WalkTimePicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+
+            <Label Text="Activity"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="ActivityEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter activity details" />
+                <TimePicker x:Name="ActivityPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Appointments"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="AppointmentsEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Appointments details" />
+                <TimePicker x:Name="AppointmentsPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+            
+
+            <Label Text="Morning Water Reminder"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="WaterReminderMorningEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Morning Water details" />
+                <TimePicker x:Name="WaterReminderMorningPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Afternoon Water Reminder"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="WaterReminderAfternoonEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Afternoon Water details" />
+                <TimePicker x:Name="WaterReminderAfternoonPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+            
+            <Label Text="Evening Water Reminder"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="WaterReminderEveningEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Evening Water details" />
+                <TimePicker x:Name="WaterReminderEveningPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+            
+            <Label Text="Morning Evening Reminder"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="WaterReminderNightEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Evening Water details" />
+                <TimePicker x:Name="WaterReminderNightPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Morning Medicines"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="MorningMedicinesEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Morning Medicine details" />
+                <TimePicker x:Name="MorningMedicinesPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Afternoon Medicines"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="AfternoonMedicinesEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Afternoon Medicines details" />
+                <TimePicker x:Name="AfternoonMedicinesPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Evening Medicines"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="EveningMedicinesEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Evening Medicines details" />
+                <TimePicker x:Name="EveningMedicinesPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Night Medicines"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="NightMedicinesEntry"
+                       Grid.Column="0"
+                       Placeholder="Enter Night Medicines details" />
+                <TimePicker x:Name="NightMedicinesPicker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Other Tasks"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="MoreTasks1Entry"
+                       Grid.Column="0"
+                       Placeholder="Enter Other Task details" />
+                <TimePicker x:Name="MoreTasks1Picker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Other Tasks"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="MoreTasks2Entry"
+                       Grid.Column="0"
+                       Placeholder="Enter Other Task details" />
+                <TimePicker x:Name="MoreTasks2Picker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Other Tasks"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="MoreTasks3Entry"
+                       Grid.Column="0"
+                       Placeholder="Enter Other Task details" />
+                <TimePicker x:Name="MoreTasks3Picker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Other Tasks"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="MoreTasks4Entry"
+                       Grid.Column="0"
+                       Placeholder="Enter Other Task details" />
+                <TimePicker x:Name="MoreTasks4Picker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+            <Label Text="Other Tasks"
+                   FontSize="Medium" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="MoreTasks5Entry"
+                       Grid.Column="0"
+                       Placeholder="Enter Other Task details" />
+                <TimePicker x:Name="MoreTasks5Picker"
+                            Grid.Column="1"
+                            Format="t" />
+            </Grid>
+
+
+            <Label Text="Photo Details"
+                   FontSize="Medium" />
+            <Entry x:Name="PhotoDetails"
+                   Placeholder="Photo Details" 
+                   Margin="0,0,0,20"/>
+
+            <Button Text="Upload Image" Clicked="OnPickImageClicked" HorizontalOptions="Start" VerticalOptions="Start"/>
+            <Image x:Name="SelectedImage" Margin="0,20,10,10" />
+
+            <Button Text="Save" Clicked="OnSaveButtonClicked" HorizontalOptions="End" VerticalOptions="End" Margin="0,-73,10,10"/>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
